@@ -7,7 +7,7 @@ const MenuLayout: React.FC = () => {
   return (
     <Container>
       <p className="text-lg my-6 font-semibold">Find Our Solution</p>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-2">
         {imagesIcon.map((el, indx) => (
           <Card key={indx} className="dark:bg-[#3d3d3d]">
             <CardContent className="flex flex-col gap-2 p-0 aspect-square items-center justify-center">
