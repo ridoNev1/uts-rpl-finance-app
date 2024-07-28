@@ -75,7 +75,7 @@ export default function MultipleCarousel() {
                       </p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-[1fr,4fr]">
+                  <div className="grid grid-cols-[70px,1fr] gap-2">
                     <p className="text-sm items-center font-medium leading-none">
                       Keahlian :
                     </p>
