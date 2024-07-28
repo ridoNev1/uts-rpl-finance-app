@@ -105,7 +105,12 @@ const Calculate: React.FC<ICalculate> = ({ setCalculate }) => {
     };
   }
 
+  function formatNumber(value: number): string {
+    return value.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
   function onSubmit(data: FormData) {
+    console.log(data);
     let result = calculateInvestment(
       data.totalValues,
       data.years,
@@ -115,21 +120,17 @@ const Calculate: React.FC<ICalculate> = ({ setCalculate }) => {
     );
 
     const formattedResult = {
-      currentMoney: `Rp. ${data.currentMoney.toLocaleString().split(".")[0]}`,
-      monthlyInvestment: `Rp. ${
-        data.monthlyInvestment.toLocaleString().split(".")[0]
-      }`,
+      currentMoney: `Rp. ${formatNumber(data.currentMoney)}`,
+      monthlyInvestment: `Rp. ${formatNumber(data.monthlyInvestment)}`,
       annualReturnRate: `${data.annualReturnRate}% / tahun`,
       investmentDuration: `${data.years} tahun`,
-      totalAccumulatedAmount: `Rp. ${
-        result.totalAccumulatedAmount.toLocaleString().split(".")[0]
-      }`,
-      deficit: `Rp. ${result.deficit.toLocaleString().split(".")[0]}`,
-      interestEarned: `Rp. ${
-        result.interestEarned.toLocaleString().split(".")[0]
-      }`,
+      totalAccumulatedAmount: `Rp. ${formatNumber(
+        result.totalAccumulatedAmount
+      )}`,
+      deficit: `Rp. ${formatNumber(result.deficit)}`,
+      interestEarned: `Rp. ${formatNumber(result.interestEarned)}`,
       isDeficit: result.deficit > 0,
-      goalNominal: `Rp. ${data.totalValues.toLocaleString().split(".")[0]}`,
+      goalNominal: `Rp. ${formatNumber(data.totalValues)}`,
     };
 
     setResCalculate(formattedResult);
