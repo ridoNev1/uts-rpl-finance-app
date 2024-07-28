@@ -9,6 +9,10 @@ import BudgetIcon from "./budget.png";
 
 const imagesIcon = [
   {
+    name: "Investasi",
+    image: CalculatorIcon,
+  },
+  {
     name: "Dana Darurat",
     image: WalletIcon,
   },
@@ -16,10 +20,7 @@ const imagesIcon = [
     name: "Simulasi KPR",
     image: BudgetIcon,
   },
-  {
-    name: "Investasi",
-    image: CalculatorIcon,
-  },
+
   {
     name: "Kendaraan",
     image: CarIcon,

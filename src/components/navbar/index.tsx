@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
   const { setTheme, theme } = useTheme();
 
   return (
-    <div className="bg-card">
+    <div className="bg-card border-b max-w-[480px] mx-auto">
       <Container>
         <>
           <div className="flex justify-between items-center py-4">
