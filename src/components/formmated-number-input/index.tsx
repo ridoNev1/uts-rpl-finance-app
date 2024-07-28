@@ -23,8 +23,8 @@ const FormattedNumberInput = forwardRef<HTMLInputElement, any>(
         ref={ref}
         value={formattedValue}
         onChange={handleChange}
-        inputMode="numeric"
-        pattern="[0-9]*"
+        inputMode="decimal" // Add this line for decimal input
+        pattern="\d*" // Update this line to match numeric input
       />
     );
   }
