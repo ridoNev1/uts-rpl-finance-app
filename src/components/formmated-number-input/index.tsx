@@ -1,30 +1,42 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 
 const FormattedNumberInput = forwardRef<HTMLInputElement, any>(
   ({ value, onChange, ...props }, ref) => {
-    const [formattedValue, setFormattedValue] = useState(value);
+    const [inputValue, setInputValue] = useState(value);
 
-    const handleChange = (event: any) => {
-      const inputValue = event.target.value;
-      const numericValue = inputValue.replace(/,/g, "");
-      if (!/^\d*\.?\d*$/.test(numericValue)) {
-        return;
+    useEffect(() => {
+      setInputValue(formatNumber(value));
+    }, [value]);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const rawValue = event.target.value.replace(/\./g, "");
+      if (/^\d*\.?\d*$/.test(rawValue)) {
+        setInputValue(rawValue);
+        onChange(rawValue);
       }
-      const formatted = Number(numericValue).toLocaleString();
+    };
 
-      setFormattedValue(formatted);
-      onChange(numericValue);
+    const handleBlur = () => {
+      setInputValue(formatNumber(inputValue));
+    };
+
+    const formatNumber = (value: string | number): string => {
+      const num = parseFloat(String(value).replace(/\./g, ""));
+      if (isNaN(num)) {
+        return "";
+      }
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     };
 
     return (
       <Input
         {...props}
         ref={ref}
-        value={formattedValue}
+        value={inputValue}
         onChange={handleChange}
-        inputMode="decimal" // Add this line for decimal input
-        pattern="\d*" // Update this line to match numeric input
+        onBlur={handleBlur}
+        inputMode="numeric"
       />
     );
   }
